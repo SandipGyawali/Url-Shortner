@@ -1,4 +1,4 @@
-import { PrismaSingleton } from "@/db";
+import db from "@/db";
 import { z } from "zod";
 import { nanoid } from "nanoid";
 
@@ -11,8 +11,6 @@ interface GenerateShortUrlReturn {
 export async function generateShortUrl(
   url: string
 ): Promise<GenerateShortUrlReturn> {
-  const db = PrismaSingleton.getPrismaClient();
-
   //url schema definition
   const schema = z.object({
     url: z.string(),
