@@ -13,21 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
-  id Int @id @default(autoincrement())
-  name String
-  email String @unique
-  created_at DateTime @default(now())
-  last_login DateTime 
-  urls Url[]
-}
-
 // schema for url shortner
 model Url {
-  short_url String @id 
-  user_id Int
-  UserID Users @relation(fields: [user_id], references: [id])
-  created_at DateTime @default(now())
-  expires_at DateTime
-  lastvisited DateTime
+  id Int @id @default(autoincrement())
+  shortUrlId String 
+  originalUrl String  
+  visitHistory Int
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+  lastVisited DateTime?
 }
