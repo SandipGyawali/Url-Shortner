@@ -12,7 +12,7 @@ export async function redirectToUrlOnId(shortUrlId: string | undefined) {
 
   if (!parse.success) {
     return {
-      message: "Unsuccessful",
+      status: "Unsuccessful",
       error: true,
       description: {
         msg: parse.error,
@@ -28,7 +28,7 @@ export async function redirectToUrlOnId(shortUrlId: string | undefined) {
   console.log(exists);
   if (!exists) {
     return {
-      message: "Unsuccessful",
+      status: "Unsuccessful",
       error: true,
       description: {
         msg: `Cannot redirect the url does exists with the given shortUrlId`,
@@ -37,7 +37,7 @@ export async function redirectToUrlOnId(shortUrlId: string | undefined) {
   }
 
   return {
-    message: "Successful",
+    status: "Successful",
     error: true,
     description: {
       msg: exists.originalUrl,
