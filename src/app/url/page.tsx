@@ -59,6 +59,10 @@ function UrlList() {
                   </span>
                 </p>
                 <p className="ml-6">
+                  <span className="pr-2">ShortId: </span>
+                  <span className="text-violet-400">{url?.shortUrlId}</span>
+                </p>
+                <p className="ml-6">
                   <span className="pr-2">CreatedAt:</span>
                   <span>
                     {url?.createdAt

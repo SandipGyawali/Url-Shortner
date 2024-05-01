@@ -1,14 +1,14 @@
-import UrlForm from "./page";
+import ShortIdInputForm from "./page";
 
-function UrlLayout() {
+function GetUrlOnIdLayout() {
   return (
     <div className="url-container h-fit">
       <div className="title-wrapper flex items-center justify-center text-center my-10 font-bold relative text-4xl">
-        <span className="text-center">Shorten Url</span>
+        <span className="text-center">Get Url Based on ShortId</span>
       </div>
-      <UrlForm />
+      <ShortIdInputForm />
     </div>
   );
 }
 
-export default UrlLayout;
+export default GetUrlOnIdLayout;
