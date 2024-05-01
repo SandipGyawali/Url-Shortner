@@ -1,13 +1,15 @@
-import { ZodNumber, z } from "zod";
+import { z } from "zod";
 import db from "@/db";
 
 interface DeleteShortUrlReturn {
-  message: string;
+  status: string;
   error: boolean;
   description: Array<string> | Object;
 }
 
-export async function deleteShortUrlOnId(shortUrlId: string) {
+export async function deleteShortUrlOnId(
+  shortUrlId: string
+): Promise<DeleteShortUrlReturn> {
   const schema = z.object({
     shortUrlId: z.string(),
   });
@@ -18,7 +20,7 @@ export async function deleteShortUrlOnId(shortUrlId: string) {
 
   if (!parse.success) {
     return {
-      message: "Unsuccessful parsing of data",
+      status: "Unsuccessful parsing of data",
       error: true,
       description: { msg: parse.error },
     };
@@ -33,7 +35,7 @@ export async function deleteShortUrlOnId(shortUrlId: string) {
 
   if (!exists) {
     return {
-      message: "Unsuccessful",
+      status: "Unsuccessful",
       error: true,
       description: { msg: "The url with the id does not exists" },
     };
@@ -46,7 +48,7 @@ export async function deleteShortUrlOnId(shortUrlId: string) {
   });
 
   return {
-    message: "Successful",
+    status: "Successful",
     error: false,
     description: response,
   };

@@ -3,7 +3,7 @@ import { z } from "zod";
 import { nanoid } from "nanoid";
 
 interface GenerateShortUrlReturn {
-  message: string;
+  status: string;
   error: boolean;
   description: Array<string> | Object;
 }
@@ -22,7 +22,7 @@ export async function generateShortUrl(
 
   if (!parse.success) {
     return {
-      message: "Unsuccessful parsing of data",
+      status: "Unsuccessful parsing of data",
       error: true,
       description: { msg: parse.error },
     };
@@ -37,7 +37,7 @@ export async function generateShortUrl(
 
   if (exists) {
     return {
-      message: "Unsuccessful",
+      status: "Unsuccessful",
       error: true,
       description: {
         msg: `Short url creation failed.
@@ -59,7 +59,7 @@ export async function generateShortUrl(
   });
 
   return {
-    message: "Successful",
+    status: "Successful",
     error: false,
     description: response,
   };
