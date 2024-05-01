@@ -1,55 +1,101 @@
 "use client";
-import Button from "@/components/Button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function UrlForm() {
-  const [url, setUrl] = useState<string>("");
-  const [shortUrl, setShortUrl] = useState<string>("");
+type ResultObj = {
+  createdAt: string;
+  expiresAt: Date;
+  id: number;
+  originalUrl: string;
+  shortUrlId: string;
+  visitHistory: number;
+  lastVisited: string;
+};
 
-  function handleUrlFormSubmit() {
-    console.log(url);
-  }
+function UrlList() {
+  const [urls, setUrls] = useState<Array<ResultObj>>([]);
 
-  function click() {
-    console.log("Component button clicked");
-  }
+  useEffect(() => {
+    async function fetchList() {
+      try {
+        const res = await axios.get("/api/url");
+        if (res.status === 200) {
+          setUrls(res.data?.result);
+          toast.success("Data fetched successfully");
+        }
+      } catch (err) {
+        toast.error("Error fetching data!");
+      }
+    }
+
+    fetchList();
+  }, []);
 
   return (
     <div
-      className="url-form-wrapper rounded h-1/2 m-auto w-11/12 lg:w-8/12 
+      className="url-form-wrapper relative rounded h-fit m-auto mb-8 w-11/12 lg:w-8/12 
         2xl:6/12 border br-white p-8"
     >
-      <form
-        onSubmit={handleUrlFormSubmit}
-        className="url-form w-full h-full relative"
-      >
+      <div className="url-form relative min-h-[500px]">
         <div className="input-wrapper flex flex-col">
-          <label className="font-bold text-lg text-white/70">
-            Enter your Url:
-          </label>
-          <input
-            type="text"
-            onChange={(e) => setUrl(e.target.value)}
-            className="text-white rounded bg-black border br-white h-10 px-2 font-semibold"
-          />
+          <>
+            {urls.map((url, index) => (
+              <div key={index} className="my-4 py-1">
+                [ <br />
+                <p className="ml-6">
+                  <span>id: </span>
+                  {url?.id}
+                </p>
+                <p>
+                  <span className="ml-6 pr-2">OriginalUrl: </span>
+                  <span className="text-violet-400">{url?.originalUrl}</span>
+                </p>
+                <p className="ml-6">
+                  <span className="pr-2">ShortUrl: </span>
+                  <span className="text-violet-400">
+                    http://localhost:3000/{url?.shortUrlId}
+                  </span>
+                </p>
+                <p className="ml-6">
+                  <span className="pr-2">CreatedAt:</span>
+                  <span>
+                    {url?.createdAt
+                      ? new Date(url?.createdAt).toLocaleString()
+                      : ""}
+                  </span>
+                </p>
+                <p className="ml-6">
+                  <span className="pr-2">LastVisited:</span>
+                  <span>
+                    {url?.lastVisited
+                      ? new Date(url?.lastVisited).toLocaleString()
+                      : "null"}
+                  </span>
+                </p>
+                <p className="ml-6">
+                  <span className="pr-2">ExpiresAt:</span>
+                  <span>
+                    {url?.createdAt
+                      ? new Date(url?.expiresAt).toLocaleString()
+                      : ""}
+                  </span>
+                </p>
+                <p className="ml-6">
+                  <span className="pr-2">Visit-History-Count:</span>
+                  <span> {url?.visitHistory}</span>
+                </p>
+                ],
+                <br />
+              </div>
+            ))}
+          </>
         </div>
-        <br />
-        <br />
-        <br />
-        <div className="input-wrapper flex flex-col">
-          <label className="font-bold text-lg text-white/70">
-            Shortened Url:
-          </label>
-          <input
-            type="text"
-            onChange={(e) => setShortUrl(e.target.value)}
-            className="text-white rounded bg-black border br-white h-10 px-2 font-semibold"
-          />
-        </div>
-        <Button click={click} label="Shorten Url" />
-      </form>
+      </div>
+      <ToastContainer />
     </div>
   );
 }
 
-export default UrlForm;
+export default UrlList;
