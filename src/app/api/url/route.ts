@@ -3,9 +3,20 @@ import { generateShortUrl } from "@/actions/generateShortUrl";
 import { getExistingShortUrl } from "@/actions/getExistingShortUrl";
 
 export async function GET() {
-  const response = await getExistingShortUrl();
+  try {
+    const response = await getExistingShortUrl();
 
-  return NextResponse.json(response);
+    return NextResponse.json(response);
+  } catch (err) {
+    return NextResponse.json({
+      status: "Unsuccessful",
+      error: true,
+      description: {
+        msg: "An error occurred while processing the request",
+        error: err.message,
+      },
+    });
+  }
 }
 
 export async function POST(req: NextRequest) {
@@ -14,7 +25,7 @@ export async function POST(req: NextRequest) {
 
     if (!url) {
       return {
-        message: "UnSuccessful",
+        status: "UnSuccessful",
         error: true,
         description: {
           msg: "Issue processing url. Please send the appropriate url",
@@ -27,10 +38,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(response);
   } catch (err) {
     return NextResponse.json({
-      message: "Unsuccessful",
+      status: "Unsuccessful",
       error: true,
       description: {
         msg: "An error occurred while processing the request",
+        error: err.message,
       },
     });
   }
