@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# URL Shortener Application
+
+This is a simple URL shortener application built using Next.js, TypeScript, and Prisma. It allows users to shorten long URLs into shorter, more manageable links.
+
+## Features
+
+- Shorten long URLs into short, unique links.
+- Redirect users from short links to their original URLs.
+- Store URLs and their corresponding short links in a PostgreSQL database.
+
+## Tech Stack
+
+- **Next.js**: A React framework for building server-side rendered and statically generated applications.
+- **TypeScript**: A statically typed superset of JavaScript that enhances code quality and developer productivity.
+- **Prisma**: A modern database toolkit for TypeScript and Node.js that simplifies database access with type safety and auto-generated queries.
+
+## WorkFlow
+
+![Screenshot 2024-05-02 134832](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/c34298d3-c80e-4691-9e55-7197eee0d46e)
+
+## Client View
+
+![image](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/d05a242a-e07e-465d-87d3-ea4c3b03e0b4)
+
+![image](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/96e60642-5a42-48fc-b881-1c990bc0bc90)
+
+![image](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/1186e75e-e639-4c23-b711-166cdb57d5d6)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Before running the application, ensure you have the following installed:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js
+- npm or yarn
+- PostgreSQL
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone this repository:
 
-## Learn More
+    ```
+    git clone https://github.com/your-username/url-shortener.git
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate to the project directory:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```
+    cd url-shortener
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Install dependencies:
 
-## Deploy on Vercel
+    ```
+    npm install
+    # or
+    yarn install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Set up your PostgreSQL database and update the database connection settings in `.env` file.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Run database migrations:
+
+    ```
+    npx prisma migrate dev
+    ```
+
+### Usage
+
+To start the development server, run:
+
