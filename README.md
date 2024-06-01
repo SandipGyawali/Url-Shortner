@@ -20,8 +20,6 @@ This is a simple URL shortener application built using Next.js, TypeScript, and 
 
 ## Client View
 
-![image](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/d05a242a-e07e-465d-87d3-ea4c3b03e0b4)
-
 ![image](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/96e60642-5a42-48fc-b881-1c990bc0bc90)
 
 ![image](https://github.com/SandipGyawali/Url-Shortner/assets/66510112/1186e75e-e639-4c23-b711-166cdb57d5d6)
